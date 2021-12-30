@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin-style.css">
+    <title>Admin Dashboard</title>
+</head>
+
+<body>
+<header>
+    <nav class="nav">
+        <h4 >To-Do-Bulgaria Monitoring</h4>
+            <ul class="nav-ul" id="nav-ul">
+            </ul>
+    </nav>
+</header>
+<main>
+    <div class="container" id="container-cards">
+        </div>
+
+    <h1 class="title-table">HTTP Traces <a class="btn" th:href="@{/home}">Към профил</a></h1>
+    <div class="container-table">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Time Stamp</th>
+                        <th>Method</th>
+                        <th>Time Taken(ms)</th>
+                        <th>Status</th>
+                        <th>URL</th>
+                    </tr>
+                    </thead>
+                    <tbody id="traces-table">
+                    </tbody>
+                </table>
+            </div>
+</main>
+<script th:src="@{/js/dashboard.js}"></script>
+</body>
+</html>

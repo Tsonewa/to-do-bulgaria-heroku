@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta name="_csrf" th:content="${_csrf.getToken()}">
+    <meta name="_csrf_header" th:content="${_csrf.getHeaderName()}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/details-style.css">
+    <link rel="stylesheet" href="/css/landing-page-style.css">
+    <title>Details page</title>
+</head>
+<body>
+<header id="full-nav" th:include="/fragments/fragment :: navbar">
+</header>
+
+<input type="hidden" name="tripId" id="tripId" th:value="*{id}"/>
+
+<main th:object="${trip}">
+    <div>
+    <div class="cover-wrapper">
+        <div class="cover-pic-wrapper">
+            <img src="/images/cover.jpg">
+        </div>
+        <div class="cover-text-wrapper">
+            <div class="rating-wrapper">
+                <h2><span th:text="*{startPoint}">Nesebar</span>, България</h2>
+                <h5><i class="fas fa-star"></i></h5>
+                <h5><i class="fas fa-star"></i></h5>
+                <h5><i class="fas fa-star"></i></h5>
+                <h2>(11)</h2>
+            </div>
+            <div class="duration-wrapper">
+                <div class="duration">
+                    <h3 class="type-h3"><i class="fas fa-mountain"></i> <span th:text="*{categoryName}">Mountain</span></h3>
+                </div>
+                <div class="days">
+                    <h3 class="type-h3"><i class="fas fa-clock"></i><span th:text="*{duration}">1</span> days</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="info-wrapper">
+        <div class="info-pictures-wrapper">
+            <div class="big-image">
+                <img th:src="*{url}">
+            </div>
+        </div>
+        <div class="info-text-wrapper-p">
+            <p th:text="*{description}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam reprehenderit quo illum, repudiandae
+                quos perferendis necessitatibus pariatur ratione sint odit temporibus molestias! Amet illum voluptatem
+                ad maxime rem laborum delectus eos nisi at magnam velit, quisquam inventore quae, est explicabo
+                accusantium doloremque tenetur corporis architecto saepe libero! Et, suscipit dolore!</p>
+        </div>
+    </div>
+    <div class="plan-wrapper">
+        <h2 th:text="#{plan}">Plan</h2>
+        <hr>
+        <div class="map-wrapper">
+            <div class="plan-wrapper">
+                <div class="weather-calendar">
+                    <article th:each="w : ${weather}" th:object="${w}" class="box weather" >
+                        <div  class="icon bubble black">
+                            <div class="spin">
+                                <img src="https://dl.dropbox.com/s/0qq5anxliaopt8d/sun.png">
+                            </div>
+                        </div>
+                        <h1 th:text="*{weekDay}">Monday</h1>
+                        <span class="temp"><span> <span th:text="*{temperature.intValue()}">23</span></span>&deg;</span>
+                        <span class="high-low" ><span th:text="*{maxTemperature.intValue()}">15</span>&deg;/ <span th:text="*{minTemperature.intValue()}">28</span>&deg;</span>
+                    </article>
+                </div>
+                <div  class="day-plan-wrapper">
+                    <div th:each="i : ${trip.itinaries}" th:object="${i}" class="plan-bullet">
+                       <h1>Day <span th:text="*{day}">1</span></h1>
+                        <h1><span th:text="*{townName}">TownName</span></h1>
+                        <div class="bullet">
+                            <img src="/images/collor-dots/pink.png">
+                            <h5 th:text="*{coffeePlace}" >Coffe Place</h5>
+                            <span class="update-span" th:text="*{coffeePlaceAddress}">Add address</span>
+                            <a class="update-span" th:href="*{coffeePlaceBookingUrl}" >Book here</a>
+                        </div>
+                        <div class="bullet">
+                            <img src="/images/collor-dots/green.png">
+                            <h5 th:text="*{breakfastPlace}">Coffe Place</h5>
+                            <span class="update-span" th:text="*{breakfastPlaceAddress}">Add address</span>
+                            <a class="update-span" th:href="*{breakfastPlaceBookingUrl}" >Book here</a>
+                        </div>
+                        <div class="bullet">
+                            <img src="/images/collor-dots/orange.png">
+                            <h5 th:text="*{dinnerPlace}">Coffe Place</h5>
+                            <span class="update-span" th:text="*{dinnerPlaceAddress}">Add address</span>
+                            <a class="update-span" th:href="*{dinnerPlaceBookingUrl}" >Book here</a>
+                        </div>
+                        <div class="bullet">
+                            <img src="/images/collor-dots/purple.png">
+                            <h5 th:text="*{hotel}">Coffe Place</h5>
+                            <span class="update-span" th:text="*{hotelAddress}">Add address</span>
+                            <a class="update-span" th:href="*{hotelBookingUrl}" >Book here</a>
+                        </div>
+                        <div class="bullet">
+                            <img src="/images/collor-dots/blue.png">
+                            <h5 th:text="*{attractionName}">Coffee Place</h5>
+                        </div>
+                        <button class="btn" sec:authorize="isAuthenticated()"> <a class="uprate-a" th:href="@{'/itinerary/' + *{id} + '/edit/' + ${trip.id}}" th:method="get">Add address/Add booking</a></button>
+                    </div>
+                </div>
+            </div>
+            <div class="map-pic-wrapper">
+                <img src="/images/map.png">
+            </div>
+        </div>
+    </div>
+    <div class="details-wrapper">
+        <h2 th:text="#{details}">Details</h2>
+        <hr>
+        <div class="details-wrapper">
+            <div class="details-bullet">
+                <div  class="details bullet">
+                    <img src="/images/collor-dots/green.png">
+                    <h5 th:text="#{equipment}">Equipment</h5>
+                    <h6 th:if="*{details != null}" th:text="*{details.equipment}">bul.fslfms.fksof</h6>
+                </div>
+                <div  class="details bullet">
+                    <img src="/images/collor-dots/purple.png">
+                    <h5 th:text="#{foto}">Foto tips</h5>
+                    <h6 th:if="*{details != null}" th:text="*{details.fotoTips}">The equipment you need Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio,
+                        maxime.</h6>
+                </div>
+                <div class="details bullet">
+                    <img src="/images/collor-dots/blue.png">
+                    <h5 th:text="#{festivals}">Festivals</h5>
+                    <h6 th:if="*{details != null}" th:text="*{details.festivals}">bul.fslfms.fksof</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="comments-container">
+            <h2 th:text="#{comments}">Comments</h2>
+            <hr>
+            <ul id="comments-list" class="comments-list">
+                <li>
+                    <div class="comment-main-level">
+                        <!-- Avatar -->
+                        <div class="comment-avatar"><img
+                                src="/" alt=""></div>
+                        <!-- Main comment -->
+                        <div class="comment-box">
+                            <div class="comment-head">
+                                <h6 class="comment-name by-author">Gosho Georgiev</h6>
+                                <span>19 Dec, 2021</span>
+                            </div>
+                            <div class="comment-content">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure
+                                laudantium vitae, praesentium optio, sapiente distinctio illo?
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="comment-form">
+            <div class="comment-avatar"><img src="/images/avatar+human+male+man+men+people+person+profile+user+users-1320196163635839021.png" alt="comments-form-png"></div>
+            <form id="commentForm" th:method="POST"
+                     th:action="@{'/api/' + *{id} + '/reviews'}" class="comment-box" >
+                <textarea placeholder="Write your comment here..." id="message" name="message" ></textarea>
+                <input type="submit"
+                       class="btn"
+                       id="postComment"
+                       value="Изпрати"/>
+            </form>
+
+        </div>
+    </div>
+    <script th:src="@{/js/reviews.js}"></script>
+</main>
+<footer th:replace="/fragments/fragment :: footer">
+</footer>
+</body>
+</html>

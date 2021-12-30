@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<header th:fragment="navbar">
+    <div class="logo-wrapper">
+        <img class="logo-pic" src="/images/logo.jpg" alt="logo">
+    </div>
+    <nav>
+        <ul class="ul-nav">
+            <li>
+              <a sec:authorize="!isAuthenticated()" th:href="@{'/'}"  th:text="#{home}">Home</a>
+              <a sec:authorize="isAuthenticated()" th:href="@{'/home'}"  th:text="#{home}">Home</a>
+            </li>
+            <li>
+                <a th:href="@{/about-us}"  th:text="#{aboutUs}">About us</a>
+            </li>
+            <li>
+                <a th:href="@{/trips/best}"  th:text="#{bestTrips}">Popular trips</a>
+            </li>
+        </ul>
+        <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{/users/login}"><button class="login-btn btn" th:text="#{login}">Log in</button></a>
+        </div>
+        <div class="dropdown-wrapper">
+            <div sec:authorize="isAuthenticated()" class="dropdown">
+                <a th:action="@{/profile/my-trips}" class="fav-btn"><i class="far fa-heart"></i></a>
+                <div class="dropdown-div">
+                    <img class="profile-img" src="/images/flag-round-250.png">
+                </div>
+                <span  sec:authorize="isAuthenticated()"
+                       sec:authentication="name">Pesho</span>
+                <div class="dropdown-content">
+                    <p>
+                        <a th:href="@{/trips/add}"> <button class="btn create-btn"  th:text="#{add}">Add trip</button></a>
+                    </p>
+                    <hr>
+                    <a class="dropdown-a" th:href="@{/profile/my-trips}"  ><i class="fas fa-id-card"  th:text="#{profile}"></i></a>
+                    <a sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" class="dropdown-a" th:href="@{/admin}" ><i class="fas fa-chart-line"  th:text="#{stats}"></i></a>
+                    <a class="dropdown-a" ><i class="fas fa-cog" th:text="#{settings}" ></i></a>
+                    <hr>
+                    <form class="log-out-div" th:action="@{/users/logout}" th:method="post">
+                    <button class="dropdown-a exit-btn" ><i class="fas fa-sign-out-alt" th:text="#{logout}"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main th:fragment="search">
+    <div class="bgr-wrapper">
+        <div class="searchbar-wrapper">
+            <h3 class="searchbar-headling" ><span class="explore-span" >Explore</span> your destinations</h3>
+            <form id="searchForm" th:action="@{/trips/search}" th:method="GET">
+                <div class="search-container">
+                    <h5 th:text="#{searchDestination}">Search destination</h5>
+                    <input type="text" name="startPoint" id="startPoint" placeholder="Search location">
+                </div>
+                <div class="duration-container">
+                    <div class="start-date-wrapper">
+                        <h5 th:text="#{start}">Start</h5>
+                        <input class="calendar-input" type="date" name="startDate" id="startDate" placeholder="calendar">
+                    </div>
+                    <div class="end-date-wrapper">
+                        <h5 th:text="#{finish}">Finish</h5>
+                        <input class="calendar-input" type="date" name="endDate" id="endDate" placeholder="calendar">
+                    </div>
+                </div>
+                <div class="type-container">
+                    <label th:for="categoryName" th:text="#{type}">Choose type</label>
+                    <select name="categoryName" id="categoryName">
+                        <option value="" selected></option>
+                        <option th:value="MOUNTAIN">Mountain</option>
+                        <option th:value="SEASIDE">Seaside</option>
+                        <option th:value="CITY">City</option>
+                        <option th:value="ECO_FRIENDLY">Eco-friendly</option>
+                    </select>
+                </div>
+                    <div class="type-cards-wrapper">
+                        <div class="card">
+                            <a><i class="fas fa-mountain"></i></a>
+                            <h3 class="type-h3" th:text="#{mountain}">Mountain</h3>
+                        </div>
+                        <div class="card">
+                            <a><i class="fas fa-ship"></i></a>
+                            <h3 class="type-h3" th:text="#{seaside}">Seaside</h3>
+                        </div>
+                        <div class="card">
+                            <a><i class="fas fa-city"></i></a>
+                            <h3 class="type-h3" th:text="#{city}">City</h3>
+                        </div>
+                        <div class="card">
+                            <a><i class="fas fa-leaf"></i></a>
+                            <h3 class="type-h3" th:text="#{eco}">Eco-friendly</h3>
+                        </div>
+                    </div>
+                <div class="search-btn-wrapper">
+                    <button type="submit" class="wide-btn btn" th:text="#{searchBtn}">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="bg-container">
+            <div class="info-text-wrapper">
+                <h3 class="info-header" ><span class="amazing-span">Amazing</span> destinations</h3>
+                <p class="info" th:text="#{mission}"> There's a travel planning for every kind of traveler, whether you need to build an itinerary, plan a road trip, or coordinate your next vacation. Get your fully customized day by day itinerary for free!</p>
+                <a th:href="@{/trips/all/1}"><button class="wide-btn btn"  th:text="#{allTrips}">All trips</button></a>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<footer th:fragment="footer">
+   <ul class="footer-ul">
+       <li  th:text="#{copyRights}">&COPY All rights reserved <a th:href="@{'/'}">To-Do-Bulgaria &reg</a></li>
+       <li th:text="#{faq}">FAQ</li>
+       <li th:text="#{contact}">Contact us</li>
+       <li>
+           <form th:method="get">
+               <label th:text="#{language}" for="lang"></label>
+               <select
+                       onchange="this.form.submit()"
+                       id="lang"
+                       name="lang">
+                   <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">English</option>
+                   <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">Български</option>
+               </select>
+           </form>
+       </li>
+   </ul>
+</footer>
+</html>

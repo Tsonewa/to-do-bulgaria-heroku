@@ -1,0 +1,39 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.example.todobulgaria.config.CloudinaryConfiguration",
+      "name": "cloudinary",
+      "type": "com.example.todobulgaria.config.CloudinaryConfiguration"
+    },
+    {
+      "sourceType": "com.example.todobulgaria.monitoring.CustomActuatorEndpoint",
+      "name": "management.endpoint.custom",
+      "type": "com.example.todobulgaria.monitoring.CustomActuatorEndpoint"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.example.todobulgaria.config.CloudinaryConfiguration",
+      "name": "cloudinary.api-key",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.example.todobulgaria.config.CloudinaryConfiguration",
+      "name": "cloudinary.api-secret",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.example.todobulgaria.config.CloudinaryConfiguration",
+      "name": "cloudinary.cloud-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.example.todobulgaria.monitoring.CustomActuatorEndpoint",
+      "defaultValue": true,
+      "name": "management.endpoint.custom.enabled",
+      "description": "Whether to enable the custom endpoint.",
+      "type": "java.lang.Boolean"
+    }
+  ]
+}

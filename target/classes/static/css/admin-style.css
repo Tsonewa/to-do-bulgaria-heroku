@@ -1,0 +1,143 @@
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+
+main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-table{
+    width: 80%;
+    height: 600px;
+    max-height: 600px;
+    overflow: scroll;
+}
+
+table{
+    max-height: 600px;
+    overflow: scroll;
+    width: 100%;
+}
+
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    background: lightgray;
+    width: 100%;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.nav-ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-li{
+    display: flex;
+    flex-direction: row;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.title-table{
+    color: gray;
+    align-self: start;
+    margin-left: 100px;
+    margin-top: 100px;
+}
+
+.fab, .fas{
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    height: 150px;
+    margin: 20px;
+ }
+
+.row > div{
+    border-radius: 15px;
+    width: 200px;
+    padding: 10px;
+}
+
+p{
+    display: flex;
+    justify-content: space-between;
+}
+
+.red{
+    background: firebrick;
+}
+
+.green{
+    background: #27AE60;
+}
+
+.orange{
+    background: darkorange;
+}
+
+.blue{
+    background: dodgerblue;
+}
+
+h3{
+    display: flex;
+    justify-content: space-between;
+}
+
+#traces-table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    overflow: scroll;
+    max-height: 600px;
+}
+
+thead{
+    background: darkseagreen;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#traces-table td, #traces-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+
+#traces-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#traces-table tr:hover {background-color: #ddd;}
+
+#traces-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
+
+.btn{
+    text-decoration: none;
+    font-size: 15px;
+    background: lightblue;
+    padding: 10px 35px;
+    border-radius: 15px;
+    color: slategrey;
+    margin-left: 700px;
+}
