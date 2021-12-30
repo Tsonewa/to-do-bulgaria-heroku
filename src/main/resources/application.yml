@@ -27,9 +27,9 @@ spring:
             max-request-size: 10MB
 
 #    Init data
-#    sql:
-#        init:
-#            mode: always
+    sql:
+        init:
+            mode: always
 
 #Manager endpoints
 management:
